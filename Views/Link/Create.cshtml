@@ -1,0 +1,20 @@
+﻿@model ProiectDaw.Models.BookmarkLinkVM
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Link", null, FormMethod.Post))
+{
+    @Html.Label("Bookmark", "Bookmark: ")
+    <br />
+    @Html.DropDownListFor(b => b.BookmarkId, new SelectList(Model.BookmarkList, "Value", "Text"), "Choose a bookmark", new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.BookmarkId, "", new { @class = "text-danger" })
+
+    @Html.Label("UrlBody", "Link")
+    <br />
+    @Html.TextBox("UrlBody", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.UrlBody, "", new { @class = "text-danger" })
+    <button type="submit">Create Link</button>
+}

@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "AddBookmark";
+}
+
+<h2>AddBookmark</h2>
+
+<div>
+    @foreach (var collection in ViewBag.collections)
+    {
+        <p>@collection.Title</p>
+        <form method="post" action="/Collection/AddBookmark/@collection.CollectionId/@ViewBag.bookmarkId">
+            <button class="btn btn-default" type="submit">Details</button>
+        </form>
+    }
+</div>

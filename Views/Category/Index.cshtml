@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var category in ViewBag.Categories)
+{
+<div>
+    <p>@category.Title</p>
+    <br />
+    <form method="get" action="/Category/Edit/@category.CategoryId">
+        <button class="btn btn-default" type="submit">Edit</button>
+    </form>
+    <form method="post" action="/Category/Delete/@category.CategoryId">
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
+    <br />
+    <br />
+</div>
+}
+<form method="get" action="/Category/Create">
+    <button class="btn btn-default" type="submit">Add a new category</button>
+</form>

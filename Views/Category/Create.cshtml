@@ -1,0 +1,15 @@
+﻿@model ProiectDaw.Models.Category
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm("Create", "Category", null, FormMethod.Post))
+{
+
+    @Html.Label("Title", "Category Title: ")
+    <br />
+    @Html.TextBox("Title", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Title, "", new { @class = "text-danger" })
+}

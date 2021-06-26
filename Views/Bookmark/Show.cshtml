@@ -1,0 +1,89 @@
+﻿@model ProiectDaw.Models.Bookmark 
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Bookmark Title: @Model.Title</div>
+    <div class="panel-body">
+        Description: <strong>@Model.Description</strong>
+        <br />
+        @if (Model.Link != null)
+        {
+            @Html.Label("Link", "Link:")
+            <br />
+            @Html.DisplayFor(b => b.Link.UrlBody)
+        }
+        @if (Model.Category != null)
+        {
+            @Html.Label("Category", "Category:")
+            <br />
+            @Html.DisplayFor(b => b.Category.Title)
+        }
+        <br />
+        <div>
+            <img src="@Url.Content(Model.ImagePath)" width="500" height="500" multiple />
+        </div>
+        @foreach (var comment in Model.CommentsList)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>@comment.User.UserName</strong>
+                    <span class="text-muted">@comment.Date</span>
+                </div>
+                <div class="panel-body">
+                    <p>@comment.CommentBody</p>
+
+                    <p>@Model.UserId</p>
+                    <p>@ViewBag.CurrentUser</p>
+                    @if (ViewBag.IsAdmin || Model.UserId == ViewBag.CurrentUser)
+                    {
+                        <form method="post" action="/Comment/Delete/@comment.CommentId" class="text-right">
+                            <button class="btn btn-sm btn-danger" type="submit">Delete Comment</button>
+                        </form>
+
+                        <form method="get" action="/Comment/Edit/@comment.CommentId" class="text-right">
+                            <button class="btn btn-default" type="submit">Edit Comment</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+        @if (Request.IsAuthenticated)
+        {
+            <form method="get" action="/Collection/AddBookmark/@Model.BookmarkId">
+                <button class="btn btn-default" type="submit">Add to a collection</button>
+            </form>
+            <form method="get" action="/Comment/Create/@Model.BookmarkId">
+                <button class="btn btn-default" type="submit">Add a comment</button>
+            </form>
+        }
+        @if (ViewBag.IsAdmin || Model.UserId == ViewBag.CurrentUser)
+        {
+            if (Model.Link == null)
+            {
+                <form method="get" action="/Link/Create/@Model.BookmarkId">
+                    <button class="btn btn-default" type="submit">Add a new link</button>
+                </form>
+            }
+            else
+            {
+                <form method="get" action="/Link/Edit/@Model.Link.LinkId">
+                    <button class="btn btn-default" type="submit">Update Link</button>
+                </form>
+                <form method="post" action="/Link/Delete/@Model.Link.LinkId">
+                    <button class="btn btn-default" type="submit">Delete Link</button>
+                </form>
+            }
+            <form method="post" action="/Bookmark/Delete/@Model.BookmarkId">
+                <button class="btn btn-sm btn-danger" type="submit">Delete Bookmark</button>
+            </form>
+            <form method="get" action="/Bookmark/Edit/@Model.BookmarkId">
+                <button class="btn btn-default" type="submit">Update Bookmark</button>
+            </form>
+        }
+    </div>
+</div>

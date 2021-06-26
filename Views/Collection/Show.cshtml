@@ -1,0 +1,21 @@
+﻿@model ProiectDaw.Models.Collection
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>@Model.Title</h2>
+
+<div>
+    @foreach (var bookmark in Model.Bookmarks)
+    {
+        <div>
+            <p>@bookmark.Title</p>
+            <p>@bookmark.Description</p>
+            <img src="@Url.Content(bookmark.ImagePath)" width="250" height="250" multiple />
+
+            <form method="get" action="/Bookmark/Show/@bookmark.BookmarkId">
+                <button class="btn btn-default" type="submit">Details</button>
+            </form>
+        </div>
+    }
+</div>

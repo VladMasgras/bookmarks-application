@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    @foreach (var collection in ViewBag.Collections)
+    {
+        @Html.ActionLink((string)collection.Title, "Show", "Collection", new { Id = collection.CollectionId }, null)
+        <br />
+        <form method="post" action="/Collection/Delete/@collection.CollectionId">
+            <button class="btn btn-default" type="submit">Delete</button>
+        </form>
+    }
+    <form method="get" action="/Collection/Create">
+        <button class="btn btn-default" type="submit">Create a new collection</button>
+    </form>
+</div>

@@ -1,0 +1,30 @@
+﻿@model ProiectDaw.Models.Link
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Link</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <h4>Link</h4>
+        <br />
+
+        @Html.HiddenFor(model => model.LinkId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.UrlBody, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.EditorFor(model => model.UrlBody, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(b => b.UrlBody, "", new{ @class = "text-danger"})
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,16 @@
+﻿@model ProiectDaw.Models.Collection
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create collection</h2>
+
+@using (Html.BeginForm("Create", "Collection", null, FormMethod.Post))
+{
+    @Html.Label("Title", "Collection Title: ")
+    <br />
+    @Html.TextBox("Title", null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Title, "", new { @class = "text-danger" })
+    <br />
+    <button class="btn btn-sm btn-success" type="submit">Create</button>
+}
